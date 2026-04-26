@@ -154,7 +154,7 @@ CampusConnect transforms a fragmented and manual system into a **structured, eng
 
 ### 🚀 Deployment 
 
-
+https://kaisen2922.github.io/campusConnect/
 
 ---
 
