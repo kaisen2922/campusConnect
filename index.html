@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusConnect — Ambassador Platform</title>
+  <meta name="description" content="Campus Ambassador Management Platform with gamification, XP system, leaderboards, and task management.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Level Up Overlay -->
+  <div class="levelup-overlay" id="levelupOverlay">
+    <div class="levelup-card">
+      <span class="levelup-emoji" id="levelupEmoji">⚡</span>
+      <div class="levelup-title">Level Up!</div>
+      <div class="levelup-subtitle">You are now a <strong id="levelupName"></strong></div>
+      <button class="btn btn-primary btn-lg" onclick="document.getElementById('levelupOverlay').classList.remove('show')">
+        🎉 Awesome!
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== AUTH CONTAINER ===================== -->
+  <div id="authContainer" style="display:none;width:100%;min-height:100vh"></div>
+
+  <!-- ===================== APP CONTAINER ===================== -->
+  <div id="appContainer" class="app-layout" style="display:none">
+
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Populated by renderSidebar() -->
+    </aside>
+
+    <!-- Main -->
+    <div class="main-content">
+      <!-- Topbar -->
+      <header class="topbar" id="topbar">
+        <!-- Populated by renderTopbar() -->
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content" id="pageContent">
+        <!-- Populated by navigateTo() -->
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================== SUBMIT TASK MODAL ===================== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal" id="submitModal">
+      <div class="modal-header">
+        <span class="modal-title">📤 Submit Proof</span>
+        <button class="modal-close" onclick="closeSubmitModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="submitTaskId">
+
+      <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:10px;padding:12px 14px;margin-bottom:20px">
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:2px">Submitting proof for:</div>
+        <div style="font-weight:700;font-size:0.95rem" id="submitModalTitle"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Proof Link *</label>
+        <input id="submitProofUrl" type="url" class="form-control" placeholder="https://... (LinkedIn post, YouTube video, etc.)">
+        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:5px">Paste the URL of your submission (post, article, video, etc.)</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Notes (Optional)</label>
+        <textarea id="submitNotes" class="form-control" placeholder="Any additional details about your submission..." style="min-height:70px"></textarea>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button class="btn btn-primary" onclick="handleTaskSubmit()" style="flex:1;justify-content:center">Submit for Review</button>
+        <button class="btn btn-ghost" onclick="closeSubmitModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts — order matters! -->
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+  <script src="tasks.js"></script>
+  <script src="leaderboard.js"></script>
+  <!-- Premium Upgrade Modules -->
+  <script src="xp.js"></script>
+  <script src="level.js"></script>
+  <script src="streak.js"></script>
+  <script src="audio.js"></script>
+  <script src="themes.js"></script>
+  <script src="animations.js"></script>
+  <!-- Main router (must be last) -->
+  <script src="main.js"></script>
+
+  <script>
+    // Handle overlay click (close if clicking outside modal)
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) {
+        closeSubmitModal();
+      }
+    }
+  </script>
+
+</body>
+</html>
